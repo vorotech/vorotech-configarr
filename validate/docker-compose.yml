@@ -1,0 +1,41 @@
+services:
+  configarr:
+    image: configarr/configarr:latest
+    volumes:
+      - ../config:/app/config
+      - ./secrets.yml:/app/config/secrets.yml:ro
+    environment:
+      - DRY_RUN=true
+      - LOG_LEVEL=debug
+      - DEBUG_CREATE_FILES=true
+    depends_on:
+      - sonarr
+      - radarr
+
+  sonarr:
+    image: lscr.io/linuxserver/sonarr:latest
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Etc/UTC
+    volumes:
+      - sonarr:/config
+      - ./sonarr.xml:/config/config.xml:rw
+    ports:
+      - 8989:8989
+
+  radarr:
+    image: lscr.io/linuxserver/radarr:latest
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Etc/UTC
+    volumes:
+      - radarr:/config
+      - ./radarr.xml:/config/config.xml:rw
+    ports:
+      - 7878:7878
+
+volumes:
+  sonarr:
+  radarr:
