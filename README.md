@@ -25,25 +25,49 @@ Assuming Proxmox LXC Configarr container
    systemctl start configarr-task
    ```
 
-## Validation
+## Local Testing and Validation
 
-You can validate your configuration using Docker Compose, which is configured in this repository.
+You can test and apply your configuration using Docker Compose, which is configured in this repository.
 
-To validate the configuration, simply run:
+### Validating Configuration
 
-```bash
-make validate-config
-```
-
-This will use Docker Compose to run the Configarr validation container with the proper volume mounts and environment settings.
-
-By default, it will validate the configuration file at `config/config.yml`. You can specify a different configuration file by setting the `CONFIG_FILE` variable:
+To validate the configuration without applying changes:
 
 ```bash
-make validate-config CONFIG_FILE=/path/to/your/config.yml
+make config-validate
 ```
 
-The validation is performed using the official Configarr Docker image with the following settings:
-- Debug logging enabled
-- Configuration mounted from your local `config` directory
-- Debug file creation disabled
+This will run Configarr in dry-run mode, which validates the configuration and shows what changes would be made without actually applying them.
+
+### Applying Configuration
+
+To apply the configuration changes:
+
+```bash
+make config-apply
+```
+
+This command will run Configarr with `DRY_RUN=false` and actually apply the changes to your Sonarr and Radarr instances.
+
+### Verifying Applied Changes
+
+After applying the configuration, you can verify the changes were applied correctly:
+
+1. Check Sonarr/Radarr logs for any errors
+   - Navigate to System > Logs in Sonarr/Radarr web interface
+   - Look for entries related to configuration changes
+
+2. Verify specific settings:
+   - Quality Profiles: Settings > Profiles
+   - Custom Formats: Settings > Custom Formats
+   - Media Management: Settings > Media Management
+   - Delay Profiles: Settings > Profiles > Delay Profiles
+
+3. Stop the validation environment when done:
+   ```bash
+   make stop
+   ```
+
+Local instances of Sonarr and Radarr for testing:
+  - Sonarr: http://localhost:8989
+  - Radarr: http://localhost:7878

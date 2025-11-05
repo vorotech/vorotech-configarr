@@ -21,6 +21,7 @@ services:
     volumes:
       - sonarr:/config
       - ./sonarr.xml:/config/config.xml:rw
+      - ./data/tvshows:/mnt/tvshows
     ports:
       - 8989:8989
 
@@ -33,10 +34,11 @@ services:
     volumes:
       - radarr:/config
       - ./radarr.xml:/config/config.xml:rw
+      - ./data/movies:/mnt/movies
     ports:
       - 7878:7878
 
 volumes:
-  configarr-repos:
   sonarr:
   radarr:
+  
