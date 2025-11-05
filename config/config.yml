@@ -1,0 +1,194 @@
+################################
+# GitHub https://github.com/raydak-labs/configarr
+# Documentation https://configarr.de/docs/configuration/config-file/
+################################
+
+trashGuideUrl: https://github.com/TRaSH-Guides/Guides
+#trashRevision: master # Optional to specify sha
+recyclarrConfigUrl: https://github.com/recyclarr/config-templates
+#recyclarrRevision: master # Optional to specify sha
+
+# sonarrEnabled: true
+# radarrEnabled: true
+whisparrEnabled: false
+readarrEnabled: false
+lidarrEnabled: false
+
+customFormatDefinitions:
+  - trash_id: example-in-config-cf
+    trash_scores:
+      default: -10000
+    trash_description: "Language: German Only"
+    name: "Language: Not German"
+    includeCustomFormatWhenRenaming: false
+    specifications:
+      - name: Not German Language
+        implementation: LanguageSpecification
+        negate: true
+        required: false
+        fields:
+          value: 4
+  - trash_id: example-release-title-cf
+    trash_scores:
+      default: 0
+    name: ExampleReleaseTitleCF
+    includeCustomFormatWhenRenaming: false
+    specifications:
+      - name: Preferred Words
+        implementation: ReleaseTitleSpecification
+        negate: false
+        required: false
+        fields:
+          value: "\\b(SPARKS|Framestor)\\b"
+
+sonarr:
+  instance1:
+    # Set the URL/API Key to your actual instance
+    base_url: http://sonarr:8989
+    api_key: !secret SONARR_API_KEY
+
+    # since v1.11.0, optional, for disabling instances
+    #enabled: false
+
+    # since v1.12.0. Optional
+    # delete_unmanaged_custom_formats:
+    #   enabled: true
+    #   ignore:
+    #     - CustomFormatToKeep
+
+    quality_definition:
+      type: series
+
+    include:
+      #### Custom
+      - template: sonarr-cf
+      - template: sonarr-quality
+
+    custom_formats:
+      - trash_ids:
+          - e6258996055b9fbab7e9cb2f75819294
+        assign_scores_to:
+          - name: ExampleProfile
+            # score: 0 # Uncomment this line to change score
+
+    # (experimental) since v1.12.0
+    # allows using the cf-groups from TRaSH-Guide.
+    custom_format_groups:
+      - trash_guide:
+          - id: c4735e1d02e8738044ad4ad1bf58670c # Multiple CFs, default only required=true are loaded
+            #include_unrequired: true # if you want to load all set this to true
+        assign_scores_to:
+          - name: ExampleProfile
+            # score: 0 # (experimental) since v1.16.0. Uncomment this line to change score
+
+    # Ability to rename profiles
+    # renameQualityProfiles:
+    #   - from: ExampleProfile
+    #     to: RenamedExampleProfile
+
+    # Ability to clone profiles
+    # cloneQualityProfiles:
+    #   - from: RenamedExampleProfile
+    #     to: ClonedProfile
+
+radarr:
+  instance1:
+    # Set the URL/API Key to your actual instance
+    base_url: http://radarr:7878
+    api_key: !secret RADARR_API_KEY
+
+    # since v1.14.0. Optional
+    root_folders:
+      - "/app"
+
+    # since v1.14.0. Optional
+    delay_profiles:
+      default:
+        enableUsenet: true
+        enableTorrent: false
+        preferredProtocol: usenet
+        usenetDelay: 10
+        torrentDelay: 0
+        bypassIfHighestQuality: false
+        bypassIfAboveCustomFormatScore: false
+        minimumCustomFormatScore: 0
+      additional:
+        - enableUsenet: true
+          enableTorrent: false
+          preferredProtocol: usenet
+          usenetDelay: 10
+          torrentDelay: 0
+          bypassIfHighestQuality: false
+          bypassIfAboveCustomFormatScore: false
+          minimumCustomFormatScore: 0
+          order: 1
+          tags:
+            - delayprofiletest
+
+    # experimental
+    media_management:
+      recycleBin: "/tmp"
+
+    # experimental
+    media_naming_api: {}
+
+    # naming from TRaSH. See docs
+    media_naming: {}
+
+    include:
+      # Comment out any of the following includes to disable them
+      #- template: radarr-quality-definition-movie
+      #- template: radarr-quality-profile-hd-bluray-web
+      #- template: radarr-custom-formats-hd-bluray-web
+
+      # - template: radarr-quality-profile-uhd-bluray-web
+      # - template: radarr-custom-formats-uhd-bluray-web
+
+      # - template: radarr-quality-profile-remux-web-1080p
+      # - template: radarr-custom-formats-remux-web-1080p
+
+      # - template: radarr-quality-profile-remux-web-2160p
+      # - template: radarr-custom-formats-remux-web-2160p
+
+      # - template: radarr-quality-profile-anime
+      # - template: radarr-custom-formats-anime
+
+      #### Custom
+      - template: radarr-cf
+      - template: radarr-quality
+      # - template: 2b90e905c99490edc7c7a5787443748b
+      #   source: TRASH
+
+    quality_profiles:
+      - name: ExampleInConfigProfile
+        reset_unmatched_scores:
+          enabled: true
+        upgrade:
+          allowed: true
+          until_quality: WEB 2160p
+          until_score: 1000 # Upgrade until
+          min_format_score: 5 # Minimum increment for upgrade
+        min_format_score: 0 # Minimum custom format needed to download
+        quality_sort: top
+        qualities:
+          - name: Remux-2160p
+          - name: WEB 2160p
+            qualities:
+              - WEBDL-2160p
+              - WEBRip-2160p
+          - name: Remux-1080p
+          - name: WEB 1080p
+            qualities:
+              - WEBDL-1080p
+              - WEBRip-1080p
+        # Replacing the language of a profile
+        # - name: ExampleProfile
+        #   language: Any
+
+    custom_formats:
+      # Movie Versions
+      - trash_ids:
+          - 9f6cbff8cfe4ebbc1bde14c7b7bec0de # IMAX Enhanced
+        assign_scores_to:
+          - name: ExampleProfile
+            # score: 0 # Uncomment this line to disable prioritised IMAX Enhanced releases
