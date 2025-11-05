@@ -8,11 +8,6 @@ trashGuideUrl: https://github.com/TRaSH-Guides/Guides
 recyclarrConfigUrl: https://github.com/recyclarr/config-templates
 #recyclarrRevision: master # Optional to specify sha
 
-# sonarrEnabled: true
-# radarrEnabled: true
-whisparrEnabled: false
-readarrEnabled: false
-lidarrEnabled: false
 
 customFormatDefinitions:
   - trash_id: example-in-config-cf
@@ -192,3 +187,7 @@ radarr:
         assign_scores_to:
           - name: ExampleProfile
             # score: 0 # Uncomment this line to disable prioritised IMAX Enhanced releases
+
+whisparrEnabled: false
+readarrEnabled: false
+lidarrEnabled: false
