@@ -14,10 +14,16 @@ Location of config file
 
 ## Usage
 
+Assuming Proxmox LXC Configarr container
+
+1. (Recommended) Perform configuration backup of Sonarr and Radarr (via Settings)
 1. Open a console access to Configarr
 2. Checkout this repo to `/tmp`
 3. Copy `config/config.yml` file to `/opt/configarr`
-
+4. Apply config changes
+   ```
+   systemctl start configarr-task
+   ```
 
 ## Validation
 
