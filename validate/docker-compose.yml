@@ -2,12 +2,12 @@ services:
   configarr:
     image: configarr/configarr:latest
     volumes:
-      - ../config:/app/config
+      - ../config/config.yml:/app/config/config.yml:ro
       - ./secrets.yml:/app/config/secrets.yml:ro
     environment:
       - DRY_RUN=true
       - LOG_LEVEL=debug
-      - DEBUG_CREATE_FILES=true
+      - DEBUG_CREATE_FILES=false
     depends_on:
       - sonarr
       - radarr
@@ -37,5 +37,6 @@ services:
       - 7878:7878
 
 volumes:
+  configarr-repos:
   sonarr:
   radarr:
