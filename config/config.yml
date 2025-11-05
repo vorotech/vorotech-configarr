@@ -38,7 +38,7 @@ customFormatDefinitions:
         fields:
           value: 38
           part: subtitles
-  
+
 sonarr:
   instance1:
     # Set the URL/API Key to your actual instance
@@ -67,7 +67,7 @@ sonarr:
         standard: default
         daily: default
         anime: default
-      
+
     media_management:
       autoUnmonitorPreviouslyDownloadedEpisodes: true
       chmodFolder: "755"
@@ -89,7 +89,7 @@ sonarr:
       setPermissionsLinux: false
       skipFreeSpaceCheckWhenImporting: false
       useScriptImport: false
-    
+
     quality_definition:
       type: series
 
@@ -153,8 +153,8 @@ radarr:
       enabled: true
     #   ignore:
     #     - CustomFormatToKeep
-    
-    # since v1.14.0. Optional
+
+    # Optional: Root folders
     root_folders:
       - "/mnt/movies"
 
