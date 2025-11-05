@@ -68,6 +68,28 @@ sonarr:
         daily: default
         anime: default
       
+    media_management:
+      autoUnmonitorPreviouslyDownloadedEpisodes: true
+      chmodFolder: "755"
+      chownGroup: ""
+      copyUsingHardlinks: true
+      createEmptySeriesFolders: false
+      deleteEmptyFolders: true
+      downloadPropersAndRepacks: preferAndUpgrade
+      enableMediaInfo: true
+      episodeTitleRequired: always
+      extraFileExtensions: srt
+      fileDate: none
+      importExtraFiles: true
+      minimumFreeSpaceWhenImporting: 10240 # in MB
+      recycleBin: "/tmp"
+      recycleBinCleanupDays: 7
+      rescanAfterRefresh: always
+      scriptImportPath: ""
+      setPermissionsLinux: false
+      skipFreeSpaceCheckWhenImporting: false
+      useScriptImport: false
+    
     quality_definition:
       type: series
 
@@ -142,6 +164,29 @@ radarr:
       movie:
         rename: true
         standard: default
+
+    media_management:
+      autoRenameFolders: false
+      autoUnmonitorPreviouslyDownloadedMovies: true
+      chmodFolder: "755"
+      chownGroup: ""
+      copyUsingHardlinks: true
+      createEmptyMovieFolders: false
+      deleteEmptyFolders: true
+      downloadPropersAndRepacks: preferAndUpgrade
+      enableMediaInfo: true
+      extraFileExtensions: srt
+      fileDate: none
+      importExtraFiles: false
+      minimumFreeSpaceWhenImporting: 10240 # in MB
+      pathsDefaultStatic: false
+      recycleBin: /tmp
+      recycleBinCleanupDays: 7
+      rescanAfterRefresh: always
+      scriptImportPath: ""
+      setPermissionsLinux: false
+      skipFreeSpaceCheckWhenImporting: false
+      useScriptImport: false
 
     quality_definition:
       type: movie
