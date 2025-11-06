@@ -192,24 +192,20 @@ radarr:
       type: movie
 
     include:
-      - template: radarr-quality-definition-movie
-
-      - template: radarr-quality-profile-remux-web-1080p
-      - template: radarr-custom-formats-remux-web-1080p
-
-      - template: radarr-quality-profile-remux-web-2160p
-      - template: radarr-custom-formats-remux-web-2160p
+      - template: radarr-quality-definition-sqp-uhd
+      - template: radarr-quality-profile-sqp-2
+      - template: radarr-custom-formats-sqp-2
 
     custom_formats:
       # Language Custom Format
       - trash_ids:
           - ukrainian-language-cf
         assign_scores_to:
-          - name: Remux + WEB 2160p
+          - name: SQP-2
 
-      - trash_ids:
       # Audio
-          # Uncomment the next section to enable Advanced Audio Formats
+      # Uncomment the next section to enable Advanced Audio Formats
+      - trash_ids:
           # - 496f355514737f7d83bf7aa4d24f8169 # TrueHD Atmos
           # - 2f22d89048b01681dde8afe203bf2e95 # DTS X
           # - 417804f7f2c4308c1f4c5d380d4c4475 # ATMOS (undefined)
@@ -225,12 +221,11 @@ radarr:
           # - 240770601cc226190c367ef59aba7463 # AAC
           # - c2998bd0d90ed5621d8df281e839436e # DD
         assign_scores_to:
-          - name: Remux + WEB 1080p
-          - name: Remux + WEB 2160p
+          - name: SQP-2
 
       # Movie Versions
-      - trash_ids:
       # Uncomment any of the following lines to prefer these movie versions
+      - trash_ids:
           # - 0f12c086e289cf966fa5948eac571f44 # Hybrid
           # - 570bc9ebecd92723d2d21500f4be314c # Remaster
           # - eca37840c13c6ef2dd0262b141a5482f # 4K Remaster
@@ -241,36 +236,38 @@ radarr:
           # - eecf3a857724171f968a66cb5719e152 # IMAX
           # - 9f6cbff8cfe4ebbc1bde14c7b7bec0de # IMAX Enhanced
         assign_scores_to:
-          - name: Remux + WEB 1080p
-          - name: Remux + WEB 2160p
+          - name: SQP-2
 
+      # Misc
+      - trash_ids:
+          - 2899d84dc9372de3408e6d8cc18e9666 # x264
+        assign_scores_to:
+          - name: SQP-2
+            score: 0 # Uncomment this line to enable x264 releases
 
+      # Unwanted
       - trash_ids:
-          # Uncomment the next six lines to allow x265 HD releases with HDR/DV
-          - dc98083864ea246d05a42df0d05f81cc # x265 (HD)
+          # Uncomment the next six lines to block all x265 HD releases
+          # - 839bea857ed2c0a8e084f3cbdbd65ecb # x265 (no HDR/DV)
+        # assign_scores_to:
+          # - name: SQP-2
+            # score: 0
+      # - trash_ids:
+          # - dc98083864ea246d05a42df0d05f81cc # x265 (HD)
         assign_scores_to:
-          - name: Remux + WEB 1080p
-            score: 0
-          - name: Remux + WEB 2160p
-            score: 0
-      - trash_ids:
-          - 839bea857ed2c0a8e084f3cbdbd65ecb # x265 (no HDR/DV)
-        assign_scores_to:
-          - name: Remux + WEB 1080p
-          - name: Remux + WEB 2160p
+          - name: SQP-2
 
       - trash_ids:
           # Comment out the next line if you and all of your users' setups are fully DV compatible
-          #- 923b6abef9b17f937fab56cfcf89e1f1 # DV (w/o HDR fallback)
+          - 923b6abef9b17f937fab56cfcf89e1f1 # DV (w/o HDR fallback)
 
           # HDR10+ Boost - Uncomment the HDR10+ Boost line if you want to prefer HDR10+ releases
           # DV Boost - Uncomment the DV Boost line if you want to prefer DV releases
           # Uncomment both lines if you want to prefer both (DV HDR10+)
-          - b337d6812e06c200ec9a2d3cfa9d20a7 # DV Boost
-          - caa37d0df9c348912df1fb1d88f9273a # HDR10+ Boost
+          #- b337d6812e06c200ec9a2d3cfa9d20a7 # DV Boost
+          #- caa37d0df9c348912df1fb1d88f9273a # HDR10+ Boost
         assign_scores_to:
-          - name: Remux + WEB 1080p
-          - name: Remux + WEB 2160p
+          - name: SQP-2
 
       # Optional SDR
       # Only ever use ONE of the following custom formats:
@@ -280,8 +277,7 @@ radarr:
           - 9c38ebb7384dada637be8899efa68e6f # SDR
           # - 25c12f78430a3a23413652cbd1d48d77 # SDR (no WEBDL)
         assign_scores_to:
-          - name: Remux + WEB 1080p
-          - name: Remux + WEB 2160p
+          - name: SQP-2
 
 whisparrEnabled: false
 readarrEnabled: false
