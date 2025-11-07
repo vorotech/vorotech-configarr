@@ -21,7 +21,7 @@ customFormatDefinitions:
   - trash_id: ukrainian-language-cf
     trash_scores:
       default: 100  # Adjust this score based on your preference
-    trash_description: "Language: Ukrainian Audio/Subs"
+    trash_description: "Language: Ukrainian Audio"
     name: "Language: Ukrainian"
     includeCustomFormatWhenRenaming: true
     specifications:
@@ -31,13 +31,6 @@ customFormatDefinitions:
         required: false
         fields:
           value: 38  # Ukrainian language code
-      - name: Ukrainian Subtitles
-        implementation: LanguageSpecification
-        negate: false
-        required: false
-        fields:
-          value: 38
-          part: subtitles
 
 sonarr:
   instance1:
@@ -57,6 +50,7 @@ sonarr:
     # Optional: Root folders
     root_folders:
       - /mnt/tv
+      - /mnt/anime
 
     # Media Naming Configuration
     media_naming:
