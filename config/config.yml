@@ -49,8 +49,8 @@ sonarr:
 
     # Optional: Root folders
     root_folders:
-      - /mnt/tv
-      - /mnt/anime
+      - /mnt/data/media/tv
+      - /mnt/data/media/anime
 
     # Media Naming Configuration
     media_naming:
@@ -76,7 +76,7 @@ sonarr:
       fileDate: none
       importExtraFiles: true
       minimumFreeSpaceWhenImporting: 10240 # in MB
-      recycleBin: "/mnt/recycle" # nfs share
+      recycleBin: "/mnt/data/#recycle" # nfs share
       recycleBinCleanupDays: 7
       rescanAfterRefresh: always
       scriptImportPath: ""
@@ -199,7 +199,7 @@ radarr:
 
     # Optional: Root folders
     root_folders:
-      - /mnt/movies
+      - /mnt/data/media/movies
 
     # Media Naming Configuration
     media_naming:
@@ -223,7 +223,7 @@ radarr:
       importExtraFiles: false
       minimumFreeSpaceWhenImporting: 10240 # in MB
       pathsDefaultStatic: false
-      recycleBin: "/mnt/recycle" # nfs share
+      recycleBin: "/mnt/data/#recycle" # nfs share
       recycleBinCleanupDays: 7
       rescanAfterRefresh: always
       scriptImportPath: ""
