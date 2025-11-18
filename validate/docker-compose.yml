@@ -6,7 +6,7 @@ services:
       - ./secrets.yml:/app/config/secrets.yml:ro
     environment:
       - DRY_RUN=true
-      - LOG_LEVEL=debug
+      - LOG_LEVEL=info
       - DEBUG_CREATE_FILES=false
     depends_on:
       - sonarr

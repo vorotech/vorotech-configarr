@@ -204,7 +204,7 @@ radarr:
       folder: default
       movie:
         rename: true
-        standard: default
+        standard: plex-tmdb
 
     media_management:
       autoRenameFolders: false
