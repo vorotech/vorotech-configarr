@@ -36,7 +36,7 @@ customFormatDefinitions:
 sonarr:
   instance1:
     # Set the URL/API Key to your actual instance
-    base_url: http://sonarr:8989
+    base_url: !secret SONARR_URL
     api_key: !secret SONARR_API_KEY
 
     # Optional: For disabling instances
@@ -183,7 +183,7 @@ sonarr:
 radarr:
   instance1:
     # Set the URL/API Key to your actual instance
-    base_url: http://radarr:7878
+    base_url: !secret RADARR_URL
     api_key: !secret RADARR_API_KEY
 
     # Optional: For disabling instances
